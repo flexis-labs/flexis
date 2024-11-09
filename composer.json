@@ -1,5 +1,9 @@
 {
     "require": {
-        "psr/container": "^2.0"
+        "psr/container": "^2.0",
+        "ext-simplexml": "*",
+        "ext-iconv": "*",
+        "ext-mbstring": "*",
+        "symfony/yaml": "^7.1"
     }
 }
