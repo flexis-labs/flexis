@@ -1,9 +1,13 @@
 {
     "require": {
-        "psr/container": "^2.0",
         "ext-simplexml": "*",
         "ext-iconv": "*",
         "ext-mbstring": "*",
-        "symfony/yaml": "^7.1"
+        "ext-sqlsrv": "*",
+        "ext-pdo": "*",
+        "ext-mysqli": "*",
+        "symfony/yaml": "^7.1",
+        "psr/container": "^2.0",
+        "psr/log": "^3.0"
     }
 }

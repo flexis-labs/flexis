@@ -4,3 +4,4 @@
 /vendor
 loader.php
 composer.lock
+/qodana.yaml
