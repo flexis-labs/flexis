@@ -58,12 +58,12 @@ abstract class AbstractEvent implements EventInterface, ArrayAccess, Serializabl
     /**
      * Получает значение аргумента события.
      *
-     * @param   string  $name     Имя аргумента.
-     * @param   mixed   $default  Значение по умолчанию, если не найдено.
+     * @param string $name     Имя аргумента.
+     * @param mixed|null $default  Значение по умолчанию, если не найдено.
      *
      * @return  mixed  Значение аргумента или значение по умолчанию.
      */
-    public function getArgument($name, $default = null): mixed {
+    public function getArgument(string $name, mixed $default = null): mixed {
         if (isset($this->arguments[$name])) {
             return $this->arguments[$name];
         }

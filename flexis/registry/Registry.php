@@ -6,10 +6,11 @@
 
 namespace Flexis\Registry;
 
+use Flexis\Utilities\ArrayHelper;
+
 use ArrayAccess;
 use ArrayIterator;
 use Countable;
-use Flexis\Utilities\ArrayHelper;
 use IteratorAggregate;
 use JsonSerializable;
 use stdClass;

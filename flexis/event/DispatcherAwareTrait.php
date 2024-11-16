@@ -15,7 +15,7 @@ trait DispatcherAwareTrait {
      *
      * @var    DispatcherInterface|null
      */
-    private ?DispatcherInterface $dispatcher;
+    private ?DispatcherInterface $dispatcher = null;
 
     /**
      * Получает диспетчер событий.
