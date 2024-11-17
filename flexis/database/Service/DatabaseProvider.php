@@ -11,6 +11,7 @@ use Flexis\Database\DatabaseFactory;
 use Flexis\Database\DatabaseInterface;
 use Flexis\DIP\Container;
 use Flexis\DIP\ServiceProviderInterface;
+use Flexis\Registry\Registry;
 
 /**
  * Поставщик услуг базы данных
@@ -30,20 +31,13 @@ class DatabaseProvider implements ServiceProviderInterface {
             ->share(
                 DatabaseDriver::class,
                 function (Container $container) {
-                    $options = [
-						'driver'   => 'pgsql',
-						'host'     => 'localhost',
-						'user'     => 'postgres',
-						'password' => 'UZs96T8u3LNn',
-						'database' => 'local_db',
-						'prefix'   => 'qulpm_',
-					];
+                    /** @var Registry $config */
+                    $config  = $container->get('config');
+                    $options = (array) $config->get('database');
 
                     return $container->get(DatabaseFactory::class)->getDriver($options['driver'], $options);
                 }
             );
-
-
 
         $container->share(
             DatabaseFactory::class,
