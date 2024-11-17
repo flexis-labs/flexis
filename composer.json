@@ -1,13 +1,33 @@
 {
+    "name": "flexis-labs/flexis",
+    "type": "library",
+    "description": "The Flexis PHP framework",
+    "keywords": [
+        "framework",
+        "dev"
+    ],
     "require": {
-        "ext-simplexml": "*",
-        "ext-iconv": "*",
         "ext-mbstring": "*",
-        "ext-sqlsrv": "*",
+        "ext-iconv": "*",
         "ext-pdo": "*",
-        "ext-mysqli": "*",
+        "ext-simplexml": "*",
         "symfony/yaml": "^7.1",
         "psr/container": "^2.0",
         "psr/log": "^3.0"
+    },
+    "require-dev": {
+        "ext-sqlsrv": "*",
+        "ext-mysqli": "*"
+    },
+    "autoload": {
+        "psr-4": {
+            "Flexis\\Database\\": "flexis/database/",
+            "Flexis\\DIP\\": "flexis/dip/",
+            "Flexis\\Event\\": "flexis/event/",
+            "Flexis\\Language\\": "flexis/language/",
+            "Flexis\\Registry\\": "flexis/registry/",
+            "Flexis\\String\\": "flexis/string/",
+            "Flexis\\Utilities\\": "flexis/utilities/"
+        }
     }
 }
