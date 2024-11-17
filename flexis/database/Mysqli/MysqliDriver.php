@@ -565,7 +565,7 @@ class MysqliDriver extends DatabaseDriver implements UTF8MB4SupportInterface {
     }
 
     /**
-     * Определите, поддерживает ли ядро базы данных много байтовую кодировку UTF-8 (utf8mb4).
+     * Определяет, поддерживает ли ядро базы данных много байтовую кодировку UTF-8 (utf8mb4).
      *
      * @return  boolean  True, если ядро базы данных поддерживает много байтовую кодировку UTF-8.
      */
@@ -574,7 +574,7 @@ class MysqliDriver extends DatabaseDriver implements UTF8MB4SupportInterface {
     }
 
     /**
-     * Определите, является ли ядром базы данных MariaDB.
+     * Определяет, является ли ядром базы данных MariaDB.
      *
      * @return  boolean
      */

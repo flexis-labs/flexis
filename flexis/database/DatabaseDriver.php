@@ -809,7 +809,7 @@ abstract class DatabaseDriver implements DatabaseInterface, DispatcherAwareInter
     abstract public function getTableCreate(mixed $tables): array;
 
     /**
-     * Определите, поддерживает ли ядро базы данных кодировку символов UTF-8.
+     * Определяет, поддерживает ли ядро базы данных кодировку символов UTF-8.
      *
      * @return  boolean  True, если ядро базы данных поддерживает кодировку символов UTF-8.
      *
