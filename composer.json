@@ -23,6 +23,7 @@
         "psr-4": {
             "Flexis\\Database\\": "flexis/database/",
             "Flexis\\DIP\\": "flexis/dip/",
+            "Flexis\\Filter\\": "flexis/filter/",
             "Flexis\\Event\\": "flexis/event/",
             "Flexis\\Language\\": "flexis/language/",
             "Flexis\\Registry\\": "flexis/registry/",
