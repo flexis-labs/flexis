@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Part of the Flexis Framework DI Package
+ * Часть пакета Flexis DIP Framework.
  */
 
 namespace Flexis\DIP\Exception;

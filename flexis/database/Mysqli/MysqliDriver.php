@@ -79,7 +79,7 @@ class MysqliDriver extends DatabaseDriver implements UTF8MB4SupportInterface {
      *
      * @var    string
      */
-    protected static $dbMinMariadb = '10.0';
+    protected static string $dbMinMariadb = '10.0';
 
     /**
      * Конструктор.
@@ -173,7 +173,7 @@ class MysqliDriver extends DatabaseDriver implements UTF8MB4SupportInterface {
             throw new UnsupportedAdapterException('Расширение MySQLi недоступно.');
         }
 
-        $port = isset($this->options['port']) ? $this->options['port'] : 3306;
+        $port = $this->options['port'] ?? 3306;
 
         if (preg_match('/^unix:(?P<socket>[^:]+)$/', $this->options['host'], $matches)) {
             // UNIX socket URI, e.g. 'unix:/path/to/unix/socket.sock'
@@ -396,7 +396,8 @@ class MysqliDriver extends DatabaseDriver implements UTF8MB4SupportInterface {
     /**
      * Метод получения используемых параметров сортировки соединения с базой данных путем выборки текстового поля таблицы в базе данных.
      *
-     * @return  string  Параметры сортировки, используемые соединением с базой данных (string), или логическое значение false, если не поддерживается.
+     * @return  string|boolean  Параметры сортировки, используемые соединением с базой данных (string),
+     *                          или логическое значение false, если не поддерживается.
      *
      * @throws  \RuntimeException
      */
@@ -882,8 +883,8 @@ class MysqliDriver extends DatabaseDriver implements UTF8MB4SupportInterface {
     /**
      * Заявляет ли сервер базы данных о поддержке многобайтовой сортировки UTF-8 (utf8mb4)?
      *
-     * libmysql поддерживает utf8mb4 начиная с версии 5.5.3 (та же версия, что и сервер MySQL).
-     * mysqlnd поддерживает utf8mb4 с версии 5.0.9.
+     * * libmysql - поддерживает utf8mb4 начиная с версии 5.5.3 (та же версия, что и сервер MySQL).
+     * * mysqlnd - поддерживает utf8mb4 с версии 5.0.9.
      *
      * @return  boolean
      */

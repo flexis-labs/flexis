@@ -18,7 +18,7 @@ trait DispatcherAwareTrait {
     private ?DispatcherInterface $dispatcher = null;
 
     /**
-     * Получает диспетчер событий.
+     * Возвращает диспетчер событий.
      *
      * @return  DispatcherInterface
      *

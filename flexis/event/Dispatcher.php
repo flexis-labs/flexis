@@ -37,7 +37,7 @@ class Dispatcher implements DispatcherInterface {
     }
 
     /**
-     * Получает приоритет данного прослушивателя для данного события.
+     * Возвращает приоритет данного прослушивателя для данного события.
      *
      * @param string $eventName  Событие, которое нужно прослушать.
      * @param   callable  $callback   Вызываемая функция
@@ -126,7 +126,7 @@ class Dispatcher implements DispatcherInterface {
      *
      * @return  $this
      */
-    public function clearListeners(string $event = null) {
+    public function clearListeners(?string $event = null): static {
         if ($event) {
             if (isset($this->listeners[$event])) {
                 unset($this->listeners[$event]);

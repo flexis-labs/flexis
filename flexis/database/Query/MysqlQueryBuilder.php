@@ -16,29 +16,28 @@ trait MysqlQueryBuilder {
      * @return  string  Завершенный запрос.
      */
     public function __toString() {
-        switch ($this->type) {
-            case 'select':
-                if ($this->selectRowNumber) {
-                    $orderBy      = $this->selectRowNumber['orderBy'];
-                    $tmpOffset    = $this->offset;
-                    $tmpLimit     = $this->limit;
-                    $this->offset = 0;
-                    $this->limit  = 0;
-                    $tmpOrder     = $this->order;
-                    $this->order  = null;
-                    $query        = parent::__toString();
-                    $this->order  = $tmpOrder;
-                    $this->offset = $tmpOffset;
-                    $this->limit  = $tmpLimit;
+        if ($this->type == 'select') {
+            if ($this->selectRowNumber) {
+                $orderBy = $this->selectRowNumber['orderBy'];
+                $tmpOffset = $this->offset;
+                $tmpLimit = $this->limit;
+                $this->offset = 0;
+                $this->limit = 0;
+                $tmpOrder = $this->order;
+                $this->order = null;
+                $query = parent::__toString();
+                $this->order = $tmpOrder;
+                $this->offset = $tmpOffset;
+                $this->limit = $tmpLimit;
 
-                    $query = PHP_EOL . 'SELECT * FROM (' . $query . PHP_EOL . "ORDER BY $orderBy" . PHP_EOL . ') w';
+                $query = PHP_EOL . 'SELECT * FROM (' . $query . PHP_EOL . "ORDER BY $orderBy" . PHP_EOL . ') w';
 
-                    if ($this->order) {
-                        $query .= (string) $this->order;
-                    }
-
-                    return $this->processLimit($query, $this->limit, $this->offset);
+                if ($this->order) {
+                    $query .= (string)$this->order;
                 }
+
+                return $this->processLimit($query, $this->limit, $this->offset);
+            }
         }
 
         return parent::__toString();
@@ -88,8 +87,10 @@ trait MysqlQueryBuilder {
     /**
      * Агрегатная функция для получения входных значений, объединенных в строку, разделенную разделителем.
      *
+     * <pre>
      * Использование:
      * $query->groupConcat('id', ',');
+     * </pre>
      *
      * @param string $expression  Выражение, к которому применяется объединение. Это может быть имя столбца или сложный оператор SQL.
      * @param string $separator   Разделитель каждого объединенного значения.
@@ -108,16 +109,18 @@ trait MysqlQueryBuilder {
      *
      * @note «q» — это псевдоним этого метода, как и в DatabaseDriver.
      *
+     * <pre>
      * Использование:
      * $query->quote('fulltext');
      * $query->q('fulltext');
      * $query->q(array('option', 'fulltext'));
+     * </pre>
      *
      * @param array|string $text    Строка или массив строк для цитирования.
      * @param boolean      $escape  True (по умолчанию), чтобы экранировать строку, false, чтобы оставить ее без изменений.
      *
      * @return  string  Входная строка в кавычках.
-     * 
+     *
      * @throws  \RuntimeException если внутреннее свойство db не является допустимым объектом.
      */
     abstract public function quote(array|string $text, bool $escape = true): string;
@@ -125,8 +128,10 @@ trait MysqlQueryBuilder {
     /**
      * Возвращает оператор регулярного выражения.
      *
+     * <pre>
      * Использование:
      * $query->where('field ' . $query->regexp($search));
+     * </pre>
      *
      * @param string $value  Шаблон регулярного выражения.
      *
@@ -139,8 +144,10 @@ trait MysqlQueryBuilder {
     /**
      * Возвращает функцию, возвращающую случайное значение с плавающей запятой.
      *
+     * <pre>
      * Использование:
      * $query->rand();
+     * </pre>
      *
      * @return  string
      */
@@ -153,8 +160,10 @@ trait MysqlQueryBuilder {
      *
      * Перед передачей методу убедитесь, что значение является целым числом.
      *
+     * <pre>
      * Использование:
      * $query->findInSet((int) $parent->id, 'a.assigned_cat_ids')
+     * </pre>
      *
      * @param string $value  Значение для поиска.
      * @param string $set    Список значений разделенных запятыми.
@@ -168,16 +177,18 @@ trait MysqlQueryBuilder {
     /**
      * Возвращает номер текущей строки.
      *
+     * <pre>
      * Использование:
      * $query->select('id');
      * $query->selectRowNumber('ordering,publish_up DESC', 'new_ordering');
      * $query->from('#__content');
+     * </pre>
      *
      * @param string $orderBy           Выражение порядка для оконной функции.
      * @param string $orderColumnAlias  Псевдоним для нового столбца заказа.
      *
      * @return  $this
-     * 
+     *
      * @throws  \RuntimeException
      */
     public function selectRowNumber(string $orderBy, string $orderColumnAlias): static {
@@ -195,12 +206,14 @@ trait MysqlQueryBuilder {
      *
      * Перед передачей методу убедитесь, что значение заключено в правильные кавычки.
      *
+     * <pre>
      * Использование:
      * $query->select($query->castAs('CHAR', 'a'));
+     * </pre>
      *
-     * @param   string  $type    Тип строки для преобразования.
-     * @param   string  $value   Значение для преобразования в виде символа.
-     * @param   string  $length  Значение для преобразования в виде символа.
+     * @param   string       $type    Тип строки для преобразования.
+     * @param   string       $value   Значение для преобразования в виде символа.
+     * @param   string|null  $length  Значение для преобразования в виде символа.
      *
      * @return  string  Оператор SQL для приведения значения к типу char.
      *

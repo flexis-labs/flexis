@@ -33,6 +33,7 @@ class DatabaseProvider implements ServiceProviderInterface {
                 function (Container $container) {
                     /** @var Registry $config */
                     $config  = $container->get('config');
+
                     $options = (array) $config->get('database');
 
                     return $container->get(DatabaseFactory::class)->getDriver($options['driver'], $options);

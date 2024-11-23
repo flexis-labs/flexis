@@ -233,7 +233,7 @@ class SqlsrvQuery extends DatabaseQuery {
     }
 
     /**
-     * Получает функцию для определения длины строки символов.
+     * Возвращает функцию для определения длины строки символов.
      *
      * @param string      $field      Значение.
      * @param string|null $operator   Оператор сравнения целочисленного значения charLength и $condition.
@@ -270,7 +270,7 @@ class SqlsrvQuery extends DatabaseQuery {
     }
 
     /**
-     * Получает текущую дату и время.
+     * Возвращает текущую дату и время.
      *
      * @return  string
      *

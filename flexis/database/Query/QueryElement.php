@@ -53,7 +53,7 @@ class QueryElement {
      *
      */
     public function __toString() {
-        if (substr($this->name, -2) === '()') {
+        if (str_ends_with($this->name, '()')) {
             return \PHP_EOL . substr($this->name, 0, -2) . '(' . implode($this->glue, $this->elements) . ')';
         }
 
@@ -77,7 +77,7 @@ class QueryElement {
     }
 
     /**
-     * Получает элементы этого элемента.
+     * Возвращает элементы этого элемента.
      *
      * @return  string[]
      *
@@ -87,18 +87,18 @@ class QueryElement {
     }
 
     /**
-     * Получает клей этого элемента.
+     * Возвращает клей этого элемента.
      *
-     * @return  string  Приклеивание элемента.
+     * @return  string|null  Приклеивание элемента.
      */
     public function getGlue(): ?string {
         return $this->glue;
     }
 
     /**
-     * Получает имя этого элемента.
+     * Возвращает имя этого элемента.
      *
-     * @return  string  Имя элемента.
+     * @return  string|null  Имя элемента.
      */
     public function getName(): ?string {
         return $this->name;

@@ -183,7 +183,7 @@ trait PostgresqlQueryBuilder {
      *
      * @return  $this
      */
-    public function clear(string $clause = null): static {
+    public function clear(?string $clause = null): static {
         switch ($clause) {
             case 'limit':
                 $this->limit = null;
@@ -253,8 +253,10 @@ trait PostgresqlQueryBuilder {
      *
      * Перед передачей методу убедитесь, что значение заключено в правильные кавычки.
      *
+     * <pre>
      * Использование:
      * $query->select($query->castAs('CHAR', 'a'));
+     * </pre>
      *
      * @param   string   $type    Тип строки для преобразования.
      * @param   string   $value   Значение для преобразования в виде символа.
@@ -282,15 +284,17 @@ trait PostgresqlQueryBuilder {
     /**
      * Объединяет массив имен или значений столбцов.
      *
+     * <pre>
      * Использование:
      * $query->select($query->concatenate(array('a', 'b')));
+     * </pre>
      *
      * @param string[]    $values     Массив значений для объединения.
      * @param string|null $separator  В качестве разделителя между каждым значением.
      *
      * @return  string  Объединенные значения.
      */
-    public function concatenate(array $values, string $separator = null): string {
+    public function concatenate(array $values, ?string $separator = null): string {
         if ($separator !== null) {
             return implode(' || ' . $this->quote($separator) . ' || ', $values);
         }
@@ -299,7 +303,7 @@ trait PostgresqlQueryBuilder {
     }
 
     /**
-     * Получает текущую дату и время.
+     * Возвращает текущую дату и время.
      *
      * @return  string  Возвращаемая строка, используемая в запросе для получения
      */
@@ -352,8 +356,10 @@ trait PostgresqlQueryBuilder {
     /**
      * Агрегатная функция для получения входных значений, объединенных в строку, разделенную разделителем.
      *
+     * <pre>
      * Использование:
      * $query->groupConcat('id', ',');
+     * </pre>
      *
      * @param string $expression  Выражение, к которому применяется объединение. Это может быть имя столбца или сложный оператор SQL.
      * @param string $separator   Разделитель каждого объединенного значения
@@ -367,8 +373,10 @@ trait PostgresqlQueryBuilder {
     /**
      * Используется для получения строки для извлечения года из столбца даты.
      *
+     * <pre>
      * Использование:
      * $query->select($query->year($query->quoteName('dateColumn')));
+     * </pre>
      *
      * @param string $date  Столбец даты, содержащий год, который необходимо извлечь.
      *
@@ -381,8 +389,10 @@ trait PostgresqlQueryBuilder {
     /**
      * Используется для получения строки для извлечения месяца из столбца даты.
      *
+     * <pre>
      * Использование:
      * $query->select($query->month($query->quoteName('dateColumn')));
+     * </pre>
      *
      * @param string $date  Столбец даты, содержащий извлекаемый месяц.
      *
@@ -395,8 +405,10 @@ trait PostgresqlQueryBuilder {
     /**
      * Используется для получения строки для извлечения дня из столбца даты.
      *
+     * <pre>
      * Использование:
      * $query->select($query->day($query->quoteName('dateColumn')));
+     * </pre>
      *
      * @param string $date  Столбец даты, содержащий день, который необходимо извлечь.
      *
@@ -409,8 +421,10 @@ trait PostgresqlQueryBuilder {
     /**
      * Используется для получения строки для извлечения часа из столбца даты.
      *
+     * <pre>
      * Использование:
      * $query->select($query->hour($query->quoteName('dateColumn')));
+     * </pre>
      *
      * @param string $date  Столбец даты, содержащий извлекаемый час.
      *
@@ -423,8 +437,10 @@ trait PostgresqlQueryBuilder {
     /**
      * Используется для получения строки для извлечения минут из столбца даты.
      *
+     * <pre>
      * Использование:
      * $query->select($query->minute($query->quoteName('dateColumn')));
+     * </pre>
      *
      * @param string $date  Столбец даты, содержащий извлекаемые минуты.
      *
@@ -437,8 +453,10 @@ trait PostgresqlQueryBuilder {
     /**
      * Используется для получения строки для извлечения секунд из столбца даты.
      *
+     * <pre>
      * Использование:
      * $query->select($query->second($query->quoteName('dateColumn')));
+     * </pre>
      *
      * @param string $date  Столбец даты, содержащий секунду, которую нужно извлечь.
      *
@@ -532,8 +550,10 @@ trait PostgresqlQueryBuilder {
     /**
      * Добавляет к текущей дате и времени.
      *
+     * <pre>
      * Использование:
      * $query->select($query->dateAdd());
+     * </pre>
      *
      * Если перед интервалом поставить знак -(отрицательный знак), будет использоваться вычитание.
      *
@@ -555,8 +575,10 @@ trait PostgresqlQueryBuilder {
     /**
      * Возвращает оператор регулярного выражения
      *
+     * <pre>
      * Использование:
      * $query->where('field ' . $query->regexp($search));
+     * </pre>
      *
      * @param string $value  Шаблон регулярного выражения.
      *
@@ -569,8 +591,10 @@ trait PostgresqlQueryBuilder {
     /**
      * Возвращает функцию, возвращающую случайное значение с плавающей запятой.
      *
+     * <pre>
      * Использование:
      * $query->rand();
+     * </pre>
      *
      * @return  string
      */
@@ -583,8 +607,10 @@ trait PostgresqlQueryBuilder {
      *
      * Перед передачей методу убедитесь, что значение является целым числом.
      *
+     * <pre>
      * Использование:
      * $query->findInSet((int) $parent->id, 'a.assigned_cat_ids')
+     * </pre>
      *
      * @param string $value  Значение для поиска.
      * @param string $set    Список значений разделенных запятыми.

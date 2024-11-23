@@ -12,7 +12,7 @@ namespace Flexis\Event;
  */
 interface EventInterface {
     /**
-     * Получает значение аргумента события.
+     * Возвращает значение аргумента события.
      *
      * @param string      $name     Имя аргумента.
      * @param mixed|null  $default  Значение по умолчанию, если не найдено.
@@ -22,7 +22,7 @@ interface EventInterface {
     public function getArgument(string $name, mixed $default = null): mixed;
 
     /**
-     * Получает название события.
+     * Возвращает название события.
      *
      * @return  string  Название события.
      */
@@ -31,7 +31,7 @@ interface EventInterface {
     /**
      * Сообщает, остановлено ли распространение события.
      *
-     * @return  boolean  True, если остановлено, и false в противном случае.
+     * @return  boolean  True, если остановлено, иначе false.
      */
     public function isStopped(): bool;
 

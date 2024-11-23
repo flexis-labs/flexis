@@ -14,7 +14,7 @@ use stdClass;
 /**
  * Драйвер базы данных MySQL, поддерживающий соединения на основе PDO
  *
- * @link   https://www.php.net/manual/en/ref.pdo-mysql.php
+ * @link   https://www.php.net/manual/ru/ref.pdo-mysql.php
  */
 class MysqlDriver extends PdoDriver implements UTF8MB4SupportInterface {
     /**
@@ -25,7 +25,7 @@ class MysqlDriver extends PdoDriver implements UTF8MB4SupportInterface {
     public ?string $name = 'mysql';
 
     /**
-     * Символ(ы), используемые для кавычек в именах операторов SQL, таких как имена таблиц, имена полей и т. д.
+     * Символ(ы), используемые для кавычек в именах операторов SQL, таких, как имена таблиц, имена полей и т.д.
      *
      * Если одна и та же строка символов используется для обеих сторон имени в кавычках,
      * иначе первый символ будет использоваться для открывающей кавычки,
@@ -571,11 +571,8 @@ class MysqlDriver extends PdoDriver implements UTF8MB4SupportInterface {
     /**
      * Метод экранирования строки для использования в инструкции SQL.
      *
-     * Экранирующая ссылка Oracle:
-     * http://www.orafaq.com/wiki/SQL_FAQ#How_does_one_escape_special_characters_when_writing_SQL_queries.3F
-     *
-     * Примечания к экранированию SQLite:
-     * http://www.sqlite.org/faq.html#q14
+     * @link http://www.orafaq.com/wiki/SQL_FAQ#How_does_one_escape_special_characters_when_writing_SQL_queries.3F Экранирующая ссылка Oracle
+     * @link http://www.sqlite.org/faq.html#q14 Примечания к экранированию SQLite
      *
      * Тело метода реализовано в Zend Framework.
      *
@@ -649,6 +646,7 @@ class MysqlDriver extends PdoDriver implements UTF8MB4SupportInterface {
      * @return  void
      *
      * @throws  \RuntimeException
+     * @throws  \Exception
      */
     public function transactionRollback(bool $toSavepoint = false): void {
         $this->connect();
@@ -673,6 +671,7 @@ class MysqlDriver extends PdoDriver implements UTF8MB4SupportInterface {
      * @return  void
      *
      * @throws  \RuntimeException
+     * @throws  \Exception
      */
     public function transactionStart(bool $asSavepoint = false): void {
         $this->connect();

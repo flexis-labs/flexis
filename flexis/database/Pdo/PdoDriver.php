@@ -180,6 +180,7 @@ abstract class PdoDriver extends DatabaseDriver {
 
                 break;
 
+            case 'sybase':
             case 'mssql':
                 $this->options['port'] = $this->options['port'] ?? 1433;
 
@@ -286,16 +287,6 @@ abstract class PdoDriver extends DatabaseDriver {
 
                 break;
 
-            case 'sybase':
-                $this->options['port'] = $this->options['port'] ?? 1433;
-
-                $format = 'mssql:host=#HOST#;port=#PORT#;dbname=#DBNAME#';
-
-                $replace = ['#HOST#', '#PORT#', '#DBNAME#'];
-                $with    = [$this->options['host'], $this->options['port'], $this->options['database']];
-
-                break;
-
             default:
                 throw new UnsupportedAdapterException('Драйвер ' . $this->options['driver'] . ' не поддерживается.');
         }
@@ -321,11 +312,8 @@ abstract class PdoDriver extends DatabaseDriver {
     /**
      * Метод экранирования строки для использования в инструкции SQL.
      *
-     * Экранирующая ссылка Oracle:
-     * http://www.orafaq.com/wiki/SQL_FAQ#How_does_one_escape_special_characters_when_writing_SQL_queries.3F
-     *
-     * Примечания к экранированию SQLite:
-     * http://www.sqlite.org/faq.html#q14
+     * @link http://www.orafaq.com/wiki/SQL_FAQ#How_does_one_escape_special_characters_when_writing_SQL_queries.3F Экранирующая ссылка Oracle
+     * @link http://www.sqlite.org/faq.html#q14 Примечания к экранированию SQLite
      *
      * Тело метода реализовано в Zend Framework.
      *
@@ -416,7 +404,10 @@ abstract class PdoDriver extends DatabaseDriver {
      * Возвращает атрибут подключения к базе данных PDO
      * https://www.php.net/manual/en/pdo.getattribute.php
      *
-     * Использование: $db->getOption(PDO::ATTR_CASE);
+     * <pre>
+     * Использование:
+     * $db->getOption(PDO::ATTR_CASE);
+     * </pre>
      *
      * @param   mixed  $key  Одна из констант PDO::ATTR_*.
      *
@@ -455,7 +446,10 @@ abstract class PdoDriver extends DatabaseDriver {
      * Устанавливает атрибут дескриптора базы данных PDO.
      * https://www.php.net/manual/en/pdo.setattribute.php
      *
-     * Использование: $db->setOption(PDO::ATTR_CASE, PDO::CASE_UPPER);
+     * <pre>
+     * Использование:
+     * $db->setOption(PDO::ATTR_CASE, PDO::CASE_UPPER);
+     * </pre>
      *
      * @param   integer  $key    Одна из констант PDO::ATTR_*.
      * @param   mixed    $value  Одна из связанных констант PDO, относящаяся к конкретному ключу атрибута.

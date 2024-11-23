@@ -30,7 +30,7 @@ class LanguageHelper {
      * @param   string  $lang  Название языка.
      * @param   string  $path  Путь к языковой папке.
      *
-     * @return  array|null  Если $lang существует, верните пару ключ/значение с метаданными языка, в противном случае верните NULL.
+     * @return  array|null  Если $lang существует, вернёт пару ключ/значение с метаданными языка, иначе вернёт NULL.
      */
     public function getMetadata(string $lang, string $path): ?array {
         $path = $this->getLanguagePath($path, $lang);
@@ -115,7 +115,7 @@ class LanguageHelper {
      *
      * @param   string  $path  Путь к XML-файлам.
      *
-     * @return  array|null  Массив, содержащий найденные метаданные в виде пары ключ => значение.
+     * @return  array|null  Массив, содержащий найденные метаданные в виде пары [ключ => значение].
      *
      * @throws  \RuntimeException
      */

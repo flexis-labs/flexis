@@ -363,7 +363,7 @@ abstract class DatabaseDriver implements DatabaseInterface, DispatcherAwareInter
     /**
      * Изменить набор символов базы данных.
      *
-     * @param string $dbName  Имя базы данных, которое будет изменено
+     * @param string|null $dbName  Имя базы данных, которое будет изменено
      *
      * @return  boolean
      *
@@ -382,8 +382,9 @@ abstract class DatabaseDriver implements DatabaseInterface, DispatcherAwareInter
     /**
      * Создаёт новую базу данных, используя информацию из объекта $options.
      *
-     * @param stdClass $options  Объект, используемый для передачи имени пользователя и базы данных драйверу базы данных. Для этого объекта должны быть установлены «db_name» и «db_user».
-     * @param boolean  $utf      True, если база данных поддерживает набор символов UTF-8.
+     * @param stdClass|null $options  Объект, используемый для передачи имени пользователя и базы данных драйверу базы данных.
+     *                                Для этого объекта должны быть установлены «db_name» и «db_user».
+     * @param boolean       $utf      True, если база данных поддерживает набор символов UTF-8.
      *
      * @return  boolean
      *
@@ -628,7 +629,7 @@ abstract class DatabaseDriver implements DatabaseInterface, DispatcherAwareInter
     }
 
     /**
-     * Получает имя базы данных, используемой этим соединением.
+     * Возвращает имя базы данных, используемой этим соединением.
      *
      * @return  string
      *
@@ -745,7 +746,7 @@ abstract class DatabaseDriver implements DatabaseInterface, DispatcherAwareInter
     }
 
     /**
-     * Получает объект класса экспортера.
+     * Возвращает объект класса экспортера.
      *
      * @return  DatabaseExporter  Объект-экспортер.
      *
@@ -756,7 +757,7 @@ abstract class DatabaseDriver implements DatabaseInterface, DispatcherAwareInter
     }
 
     /**
-     * Получает объект класса импортера.
+     * Возвращает объект класса импортера.
      *
      * @return  DatabaseImporter
      *
@@ -1139,7 +1140,7 @@ abstract class DatabaseDriver implements DatabaseInterface, DispatcherAwareInter
      * @param array|string $text    Строка или массив строк для цитирования.
      * @param boolean      $escape  True (по умолчанию), чтобы экранировать строку, false, чтобы оставить ее без изменений.
      *
-     * @return  string  Входная строка в кавычках.
+     * @return  array|string  Входная строка в кавычках или массив строк в кавычках.
      *
      */
     public function q(array|string $text, bool $escape = true): array|string {
@@ -1147,12 +1148,14 @@ abstract class DatabaseDriver implements DatabaseInterface, DispatcherAwareInter
     }
 
     /**
-     * Заключает в кавычки и, при необходимости, экранирует строку, соответствующую требованиям базы данных для использования в запросах к базе данных.
+     * Заключает в кавычки и, при необходимости, экранирует строку,
+     * соответствующую требованиям базы данных для использования в запросах к базе данных.
      *
-     * @param array|string $text    Строка или массив строк для цитирования.
-     * @param boolean      $escape  True (по умолчанию), чтобы экранировать строку, false, чтобы оставить ее без изменений.
+     * @param string[]|string   $text    Строка или массив строк для цитирования.
+     * @param boolean           $escape  True (по умолчанию), чтобы экранировать строку,
+     *                                        false, чтобы оставить ее без изменений.
      *
-     * @return  array|string  Входная строка в кавычках.
+     * @return  string[]|string  Входная строка в кавычках.
      *
      */
     public function quote(array|string $text, bool $escape = true): array|string {

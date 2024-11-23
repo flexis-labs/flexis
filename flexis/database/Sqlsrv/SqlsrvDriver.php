@@ -169,13 +169,13 @@ class SqlsrvDriver extends DatabaseDriver {
      *
      * Экранирование для MSSQL не обрабатывается в драйвере, хотя это было бы неплохо.  Из-за этого нам нужно самим справиться с побегом.
      *
-     * @param string  $text   Строка, которую нужно экранировать.
+     * @param mixed   $text   Строка, которую нужно экранировать.
      * @param boolean $extra  Необязательный параметр для обеспечения дополнительного экранирования.
      *
      * @return  string  Экранированная строка.
      *
      */
-    public function escape(string $text, bool $extra = false): string {
+    public function escape(mixed $text, bool $extra = false): string {
         if (\is_int($text)) {
             return $text;
         }

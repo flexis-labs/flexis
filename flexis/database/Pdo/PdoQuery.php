@@ -24,9 +24,11 @@ abstract class PdoQuery extends DatabaseQuery {
      *
      * Перед передачей методу убедитесь, что значение заключено в правильные кавычки.
      *
+     * <pre>
      * Использование:
      * $query->select($query->castAsChar('a'));
      * $query->select($query->castAsChar('a', 40));
+     * </pre>
      *
      * @param   string  $value  Значение для преобразования в виде символа.
      * @param   ?int    $len    Длина символа.

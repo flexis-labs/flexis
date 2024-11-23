@@ -34,7 +34,7 @@ use Flexis\Filter\InputFilter;
  * @method      string   getString($name, $default = null)    Возвращает веревку.
  * @method      string   getHtml($name, $default = null)      Возвращает HTML-строку.
  * @method      string   getPath($name, $default = null)      Возвращает путь к файлу.
- * @method      string   getUsername($name, $default = null)  Возвращает имя пользователя.
+ * @method      string   getUsername($name, $default = null)  Возвращает логин пользователя.
  * @method      mixed    getRaw($name, $default = null)       Возвращает нефильтрованное значение.
  */
 class Input implements \Countable {
@@ -87,7 +87,7 @@ class Input implements \Countable {
     }
 
     /**
-     * Волшебный метод для получения входного объекта.
+     * Магический метод для получения входного объекта.
      *
      * @param   mixed  $name  Имя входного объекта, который требуется получить.
      *
@@ -124,7 +124,7 @@ class Input implements \Countable {
     }
 
     /**
-     * Получите количество переменных.
+     * Возвращает количество переменных.
      *
      * @return  integer  Количество переменных во входных данных.
      * @see     Countable::count()
@@ -135,7 +135,7 @@ class Input implements \Countable {
     }
 
     /**
-     * Получает значение из входных данных.
+     * Возвращает значение из входных данных.
      *
      * @param   string  $name     Имя значения, которое нужно получить.
      * @param   mixed   $default  Значение по умолчанию, которое возвращается, если переменная не существует.
@@ -154,7 +154,7 @@ class Input implements \Countable {
     }
 
     /**
-     * Получает массив значений из запроса.
+     * Возвращает массив значений из запроса.
      *
      * @param   array  $vars        Ассоциативный массив ключей и типов применяемых фильтров.
      *                              Если пусто и источник данных имеет значение NULL, все входные данные будут возвращены,
@@ -192,7 +192,7 @@ class Input implements \Countable {
     }
 
     /**
-     * Получает экземпляр ввода, содержащий данные для текущего метода запроса.
+     * Возвращает экземпляр ввода, содержащий данные для текущего метода запроса.
      *
      * @return  Input
      */
@@ -284,7 +284,7 @@ class Input implements \Countable {
     }
 
     /**
-     * Получает метод запроса.
+     * Возвращает метод запроса.
      *
      * @return  string   Метод запроса.
      */

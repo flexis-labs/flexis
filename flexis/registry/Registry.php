@@ -213,7 +213,7 @@ class Registry implements JsonSerializable, ArrayAccess, IteratorAggregate, Coun
     }
 
     /**
-     * Получает этот объект, представленный как ArrayIterator.
+     * Возвращает этот объект, представленный как ArrayIterator.
      *
      * Это позволяет получать доступ к свойствам данных через оператор foreach.
      *
@@ -342,7 +342,7 @@ class Registry implements JsonSerializable, ArrayAccess, IteratorAggregate, Coun
     }
 
     /**
-     * Получает смещение в итераторе.
+     * Возвращает смещение в итераторе.
      *
      * @param  mixed  $offset  Смещение массива.
      *
@@ -597,7 +597,7 @@ class Registry implements JsonSerializable, ArrayAccess, IteratorAggregate, Coun
     }
 
     /**
-     * Получает пространство имен в заданном строковом формате.
+     * Возвращает пространство имен в заданном строковом формате.
      *
      * @param  string  $format   Формат возврата строки.
      * @param  array   $options  Параметры, используемые форматировщиком, дополнительную информацию см. в разделе форматировщике.

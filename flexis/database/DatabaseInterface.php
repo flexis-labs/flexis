@@ -68,12 +68,12 @@ interface DatabaseInterface {
     /**
      * Экранирует строку для использования в инструкции SQL.
      *
-     * @param string  $text   Строка, которую нужно экранировать.
+     * @param mixed   $text   Строка, которую нужно экранировать.
      * @param boolean $extra  Необязательный параметр для обеспечения дополнительного экранирования.
      *
      * @return  string   Экранированная строка.
      */
-    public function escape(string $text, bool $extra = false): string;
+    public function escape(mixed $text, bool $extra = false): string;
 
     /**
      * Выполняет оператор SQL.
@@ -109,7 +109,7 @@ interface DatabaseInterface {
      *
      * Если соединитель не поддерживает сообщение об этом значении, верните пустую строку.
      *
-     * @return  string
+     * @return  string|boolean
      */
     public function getConnectionCollation(): string|bool;
 
@@ -371,8 +371,8 @@ interface DatabaseInterface {
     /**
      * Заключает в кавычки и, при необходимости, экранирует строку, соответствующую требованиям базы данных для использования в запросах к базе данных.
      *
-     * @param array|string $text    Строка или массив строк для цитирования.
-     * @param boolean      $escape  True (по умолчанию), чтобы экранировать строку, false, чтобы оставить ее без изменений.
+     * @param array|string    $text    Строка или массив строк для цитирования.
+     * @param boolean         $escape  True (по умолчанию), чтобы экранировать строку, false, чтобы оставить ее без изменений.
      *
      * @return  array|string
      */

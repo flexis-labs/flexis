@@ -71,7 +71,7 @@ final class ListenersPriorityQueue implements IteratorAggregate, Countable {
     }
 
     /**
-     * Получает приоритет данного слушателя.
+     * Возвращает приоритет данного слушателя.
      *
      * @param   callable  $callback  Вызываемая функция, действующая как прослушиватель событий.
      * @param mixed|null  $default   Значение по умолчанию, которое возвращается, если прослушиватель не существует.
@@ -89,7 +89,7 @@ final class ListenersPriorityQueue implements IteratorAggregate, Countable {
     }
 
     /**
-     * Получает все прослушиватели, содержащиеся в этой очереди, отсортированные по их приоритету.
+     * Возвращает все прослушиватели, содержащиеся в этой очереди, отсортированные по их приоритету.
      *
      * @return  callable[]  Массив слушателей.
      */
@@ -104,7 +104,7 @@ final class ListenersPriorityQueue implements IteratorAggregate, Countable {
     }
 
     /**
-     * Получает приоритетную очередь.
+     * Возвращает приоритетную очередь.
      *
      * @return  ArrayIterator
      */

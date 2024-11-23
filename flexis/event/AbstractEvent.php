@@ -47,7 +47,7 @@ abstract class AbstractEvent implements EventInterface, ArrayAccess, Serializabl
     }
 
     /**
-     * Получает название события.
+     * Возвращает название события.
      *
      * @return  string  Название события.
      */
@@ -56,7 +56,7 @@ abstract class AbstractEvent implements EventInterface, ArrayAccess, Serializabl
     }
 
     /**
-     * Получает значение аргумента события.
+     * Возвращает значение аргумента события.
      *
      * @param string $name     Имя аргумента.
      * @param mixed|null $default  Значение по умолчанию, если не найдено.
@@ -83,7 +83,7 @@ abstract class AbstractEvent implements EventInterface, ArrayAccess, Serializabl
     }
 
     /**
-     * Получает все аргументы события.
+     * Возвращает все аргументы события.
      *
      * @return  array  Ассоциативный массив имен аргументов как ключей и их значений как значений.
      */
@@ -94,7 +94,7 @@ abstract class AbstractEvent implements EventInterface, ArrayAccess, Serializabl
     /**
      * Сообщает, остановлено ли распространение события.
      *
-     * @return  boolean  True, если остановлено, и false в противном случае.
+     * @return  boolean  True, если остановлено, иначе false.
      */
     public function isStopped(): bool {
         return $this->stopped === true;
@@ -178,7 +178,7 @@ abstract class AbstractEvent implements EventInterface, ArrayAccess, Serializabl
     }
 
     /**
-     * Получает значение аргумента события.
+     * Возвращает значение аргумента события.
      *
      * @param   string  $offset  Имя аргумента.
      *

@@ -43,6 +43,8 @@ use Flexis\Database\Query\QueryElement;
  * @property-read  integer|null               $offset              Смещение для набора результатов.
  * @property-read  integer|null               $limit               Предел результирующего набора.
  * @property-read  integer                    $preparedIndex       Внутренний индекс функции bindArray для уникальных подготовленных параметров.
+ *
+ * @method call(array|string $columns): static
  */
 abstract class DatabaseQuery implements QueryInterface {
     /**
@@ -101,28 +103,28 @@ abstract class DatabaseQuery implements QueryInterface {
     protected ?QueryElement $element = null;
 
     /**
-     * Элемент выбора.
+     * Элемент select.
      *
      * @var    QueryElement|null
      */
     protected ?QueryElement $select = null;
 
     /**
-     * Элемент удаления.
+     * Элемент delete.
      *
      * @var    QueryElement|null
      */
     protected ?QueryElement $delete = null;
 
     /**
-     * Элемент обновления.
+     * Элемент update.
      *
      * @var    QueryElement|null
      */
     protected ?QueryElement $update = null;
 
     /**
-     * Элемент вставки.
+     * Элемент insert.
      *
      * @var    QueryElement|null
      */
@@ -136,35 +138,35 @@ abstract class DatabaseQuery implements QueryInterface {
     protected ?QueryElement $from = null;
 
     /**
-     * Элементы соединения.
+     * Элементы join.
      *
      * @var    QueryElement[]|null
      */
     protected ?array $join = null;
 
     /**
-     * Элемент набора.
+     * Элемент set.
      *
      * @var    QueryElement|null
      */
     protected ?QueryElement $set = null;
 
     /**
-     * Элемент где.
+     * Элемент where.
      *
      * @var    QueryElement|null
      */
     protected ?QueryElement $where = null;
 
     /**
-     * Группировка по элементам.
+     * Элемент group.
      *
      * @var    QueryElement|null
      */
     protected ?QueryElement $group = null;
 
     /**
-     * Имеющий элемент.
+     * Элемент having.
      *
      * @var    QueryElement|null
      */
@@ -234,7 +236,7 @@ abstract class DatabaseQuery implements QueryInterface {
     protected ?array $selectRowNumber = null;
 
     /**
-     * Список нулевых или нулевых представлений даты и времени.
+     * Список нулевых представлений даты и времени.
      *
      * @var    string[]
      */
@@ -448,9 +450,11 @@ abstract class DatabaseQuery implements QueryInterface {
     /**
      * Добавляет один столбец или массив столбцов в предложение CALL запроса.
      *
+     * <pre>
      * Использование:
      * $query->call('a.*')->call('b.id');
      * $query->call(array('a.*', 'b.id'));
+     * </pre>
      *
      * @param array|string $columns  Строка или массив имен полей.
      *
@@ -485,8 +489,10 @@ abstract class DatabaseQuery implements QueryInterface {
      *
      * Перед передачей методу убедитесь, что значение правильно заключено в кавычки.
      *
+     * <pre>
      * Использование:
      * $query->select($query->castAs('CHAR', 'a'));
+     * </pre>
      *
      * @param   string   $type    Тип строки для преобразования.
      * @param   string   $value   Значение для преобразования в виде символа.
@@ -508,12 +514,14 @@ abstract class DatabaseQuery implements QueryInterface {
     }
 
     /**
-     * Получает количество символов в строке.
+     * Возвращает количество символов в строке.
      *
      * Обратите внимание: используйте «длину», чтобы найти количество байтов в строке.
      *
+     * <pre>
      * Использование:
      * $query->select($query->charLength('a'));
+     * </pre>
      *
      * @param string      $field      Значение.
      * @param string|null $operator   Оператор сравнения целочисленного значения charLength и $condition
@@ -711,8 +719,10 @@ abstract class DatabaseQuery implements QueryInterface {
     /**
      * Объединяет массив имен или значений столбцов.
      *
+     * <pre>
      * Использование:
      * $query->select($query->concatenate(array('a', 'b')));
+     * </pre>
      *
      * @param string[]    $values        Массив значений для объединения.
      * @param string|null $separator     В качестве разделителя между каждым значением.
@@ -729,10 +739,12 @@ abstract class DatabaseQuery implements QueryInterface {
     }
 
     /**
-     * Получает текущую дату и время.
+     * Возвращает текущую дату и время.
      *
+     * <pre>
      * Использование:
      * $query->where('published_up < '.$query->currentTimestamp());
+     * </pre>
      *
      * @return  string
      *
@@ -744,8 +756,10 @@ abstract class DatabaseQuery implements QueryInterface {
     /**
      * Добавляет к текущей дате и времени.
      *
+     * <pre>
      * Использование:
      * $query->select($query->dateAdd());
+     * </pre>
      *
      * Если перед интервалом поставить знак -(отрицательный знак), будет использоваться вычитание.
      * Примечание. Не все драйверы поддерживают все устройства.
@@ -784,8 +798,10 @@ abstract class DatabaseQuery implements QueryInterface {
     /**
      * Добавляет имя таблицы в предложение DELETE запроса.
      *
+     * <pre>
      * Использование:
      * $query->delete('#__a')->where('id = 1');
+     * </pre>
      *
      * @param string|null $table  Имя таблицы, из которой требуется удалить.
      *
@@ -836,14 +852,14 @@ abstract class DatabaseQuery implements QueryInterface {
      *
      * Обратите внимание, что «e» — это псевдоним этого метода, как и в DatabaseDriver.
      *
-     * @param string  $text   Строка, которую нужно экранировать.
+     * @param mixed   $text   Строка, которую нужно экранировать.
      * @param boolean $extra  Необязательный параметр для обеспечения дополнительного экранирования.
      *
      * @return  string  Экранированная строка.
      *
      * @throws  \RuntimeException если внутреннее свойство db не является допустимым объектом.
      */
-    public function escape(string $text, bool $extra = false): string {
+    public function escape(mixed $text, bool $extra = false): string {
         if (!($this->db instanceof DatabaseInterface)) {
             throw new \RuntimeException(sprintf('Экземпляр %s не установлен для объекта запроса.', DatabaseInterface::class));
         }
@@ -854,9 +870,11 @@ abstract class DatabaseQuery implements QueryInterface {
     /**
      * Добавляет один столбец или массив столбцов в предложение EXEC запроса.
      *
+     * <pre>
      * Использование:
      * $query->exec('a.*')->exec('b.id');
      * $query->exec(array('a.*', 'b.id'));
+     * </pre>
      *
      * @param array|string $columns  Строка или массив имен полей.
      *
@@ -891,8 +909,10 @@ abstract class DatabaseQuery implements QueryInterface {
      *
      * Перед передачей методу убедитесь, что значение является целым числом.
      *
+     * <pre>
      * Использование:
      * $query->findInSet((int) $parent->id, 'a.assigned_cat_ids')
+     * </pre>
      *
      * @param string $value  Значение для поиска.
      * @param string $set    Список значений разделенных запятыми.
@@ -907,9 +927,11 @@ abstract class DatabaseQuery implements QueryInterface {
     /**
      * Добавляет таблицу в предложение FROM запроса.
      *
+     * <pre>
      * Использование:
      * $query->select('*')->from('#__a');
      * $query->select('*')->from($subquery->alias('a'));
+     * </pre>
      *
      * @param string|QueryInterface $table  Имя таблицы или объекта DatabaseQuery (или его дочернего объекта) с установленным псевдонимом.
      *
@@ -934,8 +956,10 @@ abstract class DatabaseQuery implements QueryInterface {
     /**
      * Добавляет псевдоним для текущего запроса.
      *
+     * <pre>
      * Использование:
      * $query->select('*')->from('#__a')->alias('subquery');
+     * </pre>
      *
      * @param string $alias Псевдоним, используемый для DatabaseQuery.
      *
@@ -950,8 +974,10 @@ abstract class DatabaseQuery implements QueryInterface {
     /**
      * Используется для получения строки для извлечения года из столбца даты.
      *
+     * <pre>
      * Использование:
      * $query->select($query->year($query->quoteName('dateColumn')));
+     * </pre>
      *
      * @param string $date  Столбец даты, содержащий год, который необходимо извлечь.
      *
@@ -965,8 +991,10 @@ abstract class DatabaseQuery implements QueryInterface {
     /**
      * Используется для получения строки для извлечения месяца из столбца даты.
      *
+     * <pre>
      * Использование:
      * $query->select($query->month($query->quoteName('dateColumn')));
+     * </pre>
      *
      * @param string $date  Столбец даты, содержащий извлекаемый месяц.
      *
@@ -980,8 +1008,10 @@ abstract class DatabaseQuery implements QueryInterface {
     /**
      * Используется для получения строки для извлечения дня из столбца даты.
      *
+     * <pre>
      * Использование:
      * $query->select($query->day($query->quoteName('dateColumn')));
+     * </pre>
      *
      * @param string $date  Столбец даты, содержащий день, который необходимо извлечь.
      *
@@ -995,8 +1025,10 @@ abstract class DatabaseQuery implements QueryInterface {
     /**
      * Используется для получения строки для извлечения часа из столбца даты.
      *
+     * <pre>
      * Использование:
      * $query->select($query->hour($query->quoteName('dateColumn')));
+     * </pre>
      *
      * @param string $date  Столбец даты, содержащий извлекаемый час.
      *
@@ -1010,8 +1042,10 @@ abstract class DatabaseQuery implements QueryInterface {
     /**
      * Используется для получения строки для извлечения минут из столбца даты.
      *
+     * <pre>
      * Использование:
      * $query->select($query->minute($query->quoteName('dateColumn')));
+     * </pre>
      *
      * @param string $date  Столбец даты, содержащий извлекаемые минуты.
      *
@@ -1025,8 +1059,10 @@ abstract class DatabaseQuery implements QueryInterface {
     /**
      * Используется для получения строки для извлечения секунд из столбца даты.
      *
+     * <pre>
      * Использование:
      * $query->select($query->second($query->quoteName('dateColumn')));
+     * </pre>
      *
      * @param string $date  Столбец даты, содержащий секунду, которую нужно извлечь.
      *
@@ -1040,8 +1076,10 @@ abstract class DatabaseQuery implements QueryInterface {
     /**
      * Добавляет столбец группировки в предложение GROUP запроса.
      *
+     * <pre>
      * Использование:
      * $query->group('id');
+     * </pre>
      *
      * @param array|string $columns  Строка или массив столбцов упорядочения.
      *
@@ -1061,8 +1099,10 @@ abstract class DatabaseQuery implements QueryInterface {
     /**
      * Условия для предложения HAVING запроса.
      *
+     * <pre>
      * Использование:
      * $query->group('id')->having('COUNT(id) > 5');
+     * </pre>
      *
      * @param array|string $conditions  Строка или массив столбцов.
      * @param string       $glue        Объединение, с помощью которого можно соединить условия.
@@ -1085,10 +1125,12 @@ abstract class DatabaseQuery implements QueryInterface {
     /**
      * Добавляет имя таблицы в предложение INSERT запроса.
      *
+     * <pre>
      * Использование:
      * $query->insert('#__a')->set('id = 1');
      * $query->insert('#__a')->columns('id, title')->values('1,2')->values('3,4');
      * $query->insert('#__a')->columns('id, title')->values(array('1,2', '3,4'));
+     * </pre>
      *
      * @param string  $table           Имя таблицы, в которую нужно вставить данные.
      * @param boolean $incrementField  Имя поля для автоматического увеличения.
@@ -1118,8 +1160,10 @@ abstract class DatabaseQuery implements QueryInterface {
     /**
      * Добавляет в запрос предложение JOIN.
      *
+     * <pre>
      * Использование:
      * $query->join('INNER', 'b', 'b.id = a.id);
+     * </pre>
      *
      * @param string      $type       Тип соединения. Эта строка добавляется к ключевому слову JOIN.
      * @param string      $table      Имя таблицы.
@@ -1143,8 +1187,10 @@ abstract class DatabaseQuery implements QueryInterface {
     /**
      * Добавляет в запрос предложение INNER JOIN.
      *
+     * <pre>
      * Использование:
      * $query->innerJoin('b', 'b.id = a.id')->innerJoin('c', 'c.id = b.id');
+     * </pre>
      *
      * @param   string  $table      Имя таблицы.
      * @param   string  $condition  Условие соединения.
@@ -1159,8 +1205,10 @@ abstract class DatabaseQuery implements QueryInterface {
     /**
      * Добавляет в запрос предложение OUTER JOIN.
      *
+     * <pre>
      * Использование:
      * $query->outerJoin('b', 'b.id = a.id')->leftJoin('c', 'c.id = b.id');
+     * </pre>
      *
      * @param string      $table      Имя таблицы.
      * @param string|null $condition  Условие соединения.
@@ -1175,8 +1223,10 @@ abstract class DatabaseQuery implements QueryInterface {
     /**
      * Добавляет в запрос предложение LEFT JOIN.
      *
+     * <pre>
      * Использование:
      * $query->leftJoin('b', 'b.id = a.id')->leftJoin('c', 'c.id = b.id');
+     * </pre>
      *
      * @param string      $table      Имя таблицы.
      * @param string|null $condition  Условие соединения.
@@ -1191,8 +1241,10 @@ abstract class DatabaseQuery implements QueryInterface {
     /**
      * Добавляет в запрос предложение RIGHT JOIN.
      *
+     * <pre>
      * Использование:
      * $query->rightJoin('b', 'b.id = a.id')->rightJoin('c', 'c.id = b.id');
+     * </pre>
      *
      * @param string      $table      Имя таблицы.
      * @param string|null $condition  Условие соединения.
@@ -1209,8 +1261,10 @@ abstract class DatabaseQuery implements QueryInterface {
      *
      * Обратите внимание: используйте «charLength», чтобы найти количество символов в строке.
      *
+     * <pre>
      * Использование:
      * query->where($query->length('a').' > 3');
+     * </pre>
      *
      * @param string $value  Строка для измерения.
      *
@@ -1227,8 +1281,10 @@ abstract class DatabaseQuery implements QueryInterface {
      * Этот метод предназначен для использования, когда объект запроса передается функции для модификации.
      * Если у вас есть прямой доступ к объекту базы данных, рекомендуется напрямую использовать метод nullDate.
      *
+     * <pre>
      * Использование:
      * $query->where('modified_date <> '.$query->nullDate());
+     * </pre>
      *
      * @param boolean $quoted  При необходимости нулевую дату помещает в кавычки базы данных (по умолчанию true).
      *
@@ -1253,8 +1309,10 @@ abstract class DatabaseQuery implements QueryInterface {
     /**
      * Создаёт оператор SQL, чтобы проверить, представляет ли столбец нулевое или нулевое значение даты и времени.
      *
+     * <pre>
      * Использование:
      * $query->where($query->isNullDatetime('modified_date'));
+     * </pre>
      *
      * @param string $column Имя столбца.
      *
@@ -1277,9 +1335,11 @@ abstract class DatabaseQuery implements QueryInterface {
     /**
      * Добавляет столбец упорядочивания в предложение ORDER запроса.
      *
+     * <pre>
      * Использование:
      * $query->order('foo')->order('bar');
      * $query->order(array('foo','bar'));
+     * </pre>
      *
      * @param array|string $columns  Строка или массив столбцов упорядочения.
      *
@@ -1318,10 +1378,12 @@ abstract class DatabaseQuery implements QueryInterface {
      *
      * Обратите внимание, что «q» — это псевдоним этого метода, как и в DatabaseDriver.
      *
+     * <pre>
      * Использование:
      * $query->quote('fulltext');
      * $query->q('fulltext');
      * $query->q(array('option', 'fulltext'));
+     * </pre>
      *
      * @param array|string $text    Строка или массив строк для цитирования.
      * @param boolean      $escape  True (по умолчанию), чтобы экранировать строку, false, чтобы оставить ее без изменений.
@@ -1364,15 +1426,17 @@ abstract class DatabaseQuery implements QueryInterface {
      *
      * Обратите внимание, что «qn» — это псевдоним этого метода, как и в DatabaseDriver.
      *
+     * <pre>
      * Использование:
      * $query->quoteName('#__a');
      * $query->qn('#__a');
+     * </pre>
      *
      * @param array|string      $name  Имя идентификатора, заключаемое в кавычки, или массив имен идентификаторов, заключаемый в кавычки.
      *                                 Каждый тип поддерживает имя в виде точечной записи.
      * @param array|string|null $as    Часть запроса AS, связанная с $name. Это может быть строка или массив,
      *                                 в последнем случае длина должна быть такой же, как $name;
-     *                                 если значение равно нулю, для строки или элемента массива не будет никакой части AS.
+     *                                 если значение, равно нулю, для строки или элемента массива не будет никакой части AS.
      *
      * @return  array|string  Имя в кавычках, того же типа, что и $name.
      *
@@ -1389,8 +1453,10 @@ abstract class DatabaseQuery implements QueryInterface {
     /**
      * Возвращает функцию, возвращающую случайное значение с плавающей запятой.
      *
+     * <pre>
      * Использование:
      * $query->rand();
+     * </pre>
      *
      * @return  string
      *
@@ -1402,8 +1468,10 @@ abstract class DatabaseQuery implements QueryInterface {
     /**
      * Возвращает оператор регулярного выражения
      *
+     * <pre>
      * Использование:
      * $query->where('field ' . $query->regexp($search));
+     * </pre>
      *
      * @param string $value  Шаблон регулярного выражения.
      *
@@ -1420,9 +1488,11 @@ abstract class DatabaseQuery implements QueryInterface {
      * Обратите внимание, что при построении запроса нельзя смешивать вызовы методов вставки, обновления, удаления и выбора.
      * Однако метод select можно вызывать несколько раз в одном запросе.
      *
+     * <pre>
      * Использование:
      * $query->select('a.*')->select('b.id');
      * $query->select(array('a.*', 'b.id'));
+     * </pre>
      *
      * @param array|string $columns  Строка или массив имен полей.
      *
@@ -1455,9 +1525,11 @@ abstract class DatabaseQuery implements QueryInterface {
     /**
      * Добавляет одну строку условия или массив строк в предложение SET запроса.
      *
+     * <pre>
      * Использование:
      * $query->set('a = 1')->set('b = 2');
      * $query->set(array('a = 1', 'b = 2');
+     * </pre>
      *
      * @param array|string $conditions  Строка или массив строковых условий.
      * @param string       $glue        Связующий элемент, с помощью которого можно соединить строки условия. По умолчанию ','.
@@ -1480,16 +1552,18 @@ abstract class DatabaseQuery implements QueryInterface {
     /**
      * Устанавливает смещение и предел для набора результатов, если драйвер базы данных поддерживает это.
      *
+     * <pre>
      * Использование:
      * $query->setLimit(100, 0); (получить 100 строк, начиная с первой записи)
      * $query->setLimit(50, 50); (получить 50 строк, начиная с 50-й записи)
+     * </pre>
      *
      * @param integer $limit   Предел для набора результатов
      * @param integer $offset  Смещение для набора результатов
      *
      * @return  $this
      */
-    public function setLimit(int $limit = 0, int $offset = 0): static {
+    public function setLimit(int $limit = 0, int $offset = 0): DatabaseQuery {
         $this->limit  = $limit;
         $this->offset = $offset;
 
@@ -1500,15 +1574,17 @@ abstract class DatabaseQuery implements QueryInterface {
      * Позволяет отправлять прямой запрос к методу setQuery() драйвера базы данных,
      * но при этом разрешает запросам иметь ограниченные переменные.
      *
+     * <pre>
      * Использование:
      * $query->setQuery('select * from #__users');
+     * </pre>
      *
      * @param   DatabaseQuery|string  $sql  Строка запроса SQL или объект DatabaseQuery.
      *
      * @return  $this
      *
      */
-    public function setQuery($sql): static {
+    public function setQuery(DatabaseQuery|string $sql): DatabaseQuery {
         $this->sql = $sql;
 
         return $this;
@@ -1517,8 +1593,10 @@ abstract class DatabaseQuery implements QueryInterface {
     /**
      * Добавляет имя таблицы в предложение UPDATE запроса.
      *
+     * <pre>
      * Использование:
      * $query->update('#__foo')->set(...);
+     * </pre>
      *
      * @param string $table  Таблица для обновления.
      *
@@ -1546,9 +1624,11 @@ abstract class DatabaseQuery implements QueryInterface {
     /**
      * Добавляет набор или массив наборов, которые будут использоваться в качестве значений для инструкции INSERT INTO.
      *
+     * <pre>
      * Использование:
      * $query->values('1,2,3')->values('4,5,6');
      * $query->values(array('1,2,3', '4,5,6'));
+     * </pre>
      *
      * @param array|string $values  Один набор или массив наборов.
      *
@@ -1568,9 +1648,11 @@ abstract class DatabaseQuery implements QueryInterface {
     /**
      * Добавляет одно условие или массив условий в предложение WHERE запроса.
      *
+     * <pre>
      * Использование:
      * $query->where('a = 1')->where('b = 2');
      * $query->where(array('a = 1', 'b = 2'));
+     * </pre>
      *
      * @param array|string $conditions  Строка или массив условий.
      * @param string       $glue        Объединение, с помощью которого можно соединить условия. По умолчанию используется AND.
@@ -1595,8 +1677,10 @@ abstract class DatabaseQuery implements QueryInterface {
      *
      * Обратите внимание, что все значения должны быть одного типа данных.
      *
+     * <pre>
      * Использование:
      * $query->whereIn('id', [1, 2, 3]);
+     * </pre>
      *
      * @param   string        $keyName    Ключевое имя для предложения where.
      * @param   array         $keyValues  Массив значений для сопоставления.
@@ -1616,8 +1700,10 @@ abstract class DatabaseQuery implements QueryInterface {
      *
      * Обратите внимание, что все значения должны быть одного типа данных.
      *
-     * Usage
+     * <pre>
+     * Использование
      * $query->whereNotIn('id', [1, 2, 3]);
+     * </pre>
      *
      * @param   string        $keyName    Ключевое имя для предложения where
      * @param   array         $keyValues  Массив значений для сопоставления
@@ -1637,9 +1723,11 @@ abstract class DatabaseQuery implements QueryInterface {
      * используя потенциально другой логический оператор,
      * отличный от оператора в текущем предложении WHERE.
      *
+     * <pre>
      * Использование:
      * $query->where(array('a = 1', 'b = 2'))->extendWhere('XOR', array('c = 3', 'd = 4'));
      * будет производить: WHERE ((a = 1 AND b = 2) XOR (c = 3 AND d = 4)
+     * </pre>
      *
      * @param string $outerGlue   Связующее звено, с помощью которого можно соединить условия с текущими условиями WHERE.
      * @param mixed  $conditions  Строка или массив условий WHERE.
@@ -1658,9 +1746,11 @@ abstract class DatabaseQuery implements QueryInterface {
     /**
      * Расширяет предложение WHERE с помощью OR и одного условия или массива условий.
      *
+     * <pre>
      * Использование:
      * $query->where(array('a = 1', 'b = 2'))->orWhere(array('c = 3', 'd = 4'));
      * будет производить: WHERE ((a = 1 AND b = 2) OR (c = 3 AND d = 4)
+     * </pre>
      *
      * @param   mixed   $conditions  Строка или массив условий WHERE.
      * @param   string  $glue        Объединение, с помощью которого можно соединить условия.
@@ -1675,9 +1765,11 @@ abstract class DatabaseQuery implements QueryInterface {
     /**
      * Расширяет предложение WHERE с помощью AND и одного условия или массива условий.
      *
+     * <pre>
      * Использование:
      * $query->where(array('a = 1', 'b = 2'))->andWhere(array('c = 3', 'd = 4'));
      * будет производить: WHERE ((a = 1 AND b = 2) AND (c = 3 OR d = 4)
+     * </pre>
      *
      * @param   mixed   $conditions  Строка или массив условий WHERE.
      * @param   string  $glue        Объединение, с помощью которого можно соединить условия.
@@ -1780,8 +1872,10 @@ abstract class DatabaseQuery implements QueryInterface {
      *
      * Обратите внимание, что все значения должны быть одного типа данных.
      *
+     * <pre>
      * Использование:
      * $query->where('column in (' . implode(',', $query->bindArray($keyValues, $dataType)) . ')');
+     * </pre>
      *
      * @param   array         $values    Значения для привязки
      * @param array|string    $dataType  Константа, соответствующая типу данных SQL.
@@ -1867,9 +1961,11 @@ abstract class DatabaseQuery implements QueryInterface {
     /**
      * Добавляет запрос в UNION с текущим запросом.
      *
+     * <pre>
      * Использование:
      * $query->union('SELECT name FROM  #__foo')
      * $query->union('SELECT name FROM  #__foo', true)
+     * </pre>
      *
      * @param string|DatabaseQuery $query     Объект DatabaseQuery или строка для объединения.
      * @param boolean              $distinct  Значение true, чтобы возвращать из объединения только отдельные строки.
@@ -1884,8 +1980,10 @@ abstract class DatabaseQuery implements QueryInterface {
     /**
      * Добавляет запрос в UNION ALL с текущим запросом.
      *
+     * <pre>
      * Использование:
      * $query->unionAll('SELECT name FROM  #__foo')
+     * </pre>
      *
      * @param string|DatabaseQuery $query     Объект DatabaseQuery или строка для объединения.
      *
@@ -1901,11 +1999,13 @@ abstract class DatabaseQuery implements QueryInterface {
      * Устанавливает один запрос в набор запросов.
      * В этом типе DatabaseQuery вы можете использовать Union(), UnionAll(), order() и setLimit().
      *
+     * <pre>
      * Использование:
      * $query->querySet($query2->select('name')->from('#__foo')->order('id DESC')->setLimit(1))
      *       ->unionAll($query3->select('name')->from('#__foo')->order('id')->setLimit(1))
      *       ->order('name')
      *       ->setLimit(1)
+     * </pre>
      *
      * @param string|DatabaseQuery $query  Объект или строка DatabaseQuery.
      *
@@ -1922,12 +2022,14 @@ abstract class DatabaseQuery implements QueryInterface {
     /**
      * Создаёт объект DatabaseQuery типа querySet из текущего запроса.
      *
+     * <pre>
      * Использование:
      * $query->select('name')->from('#__foo')->order('id DESC')->setLimit(1)
      *       ->toQuerySet()
      *       ->unionAll($query2->select('name')->from('#__foo')->order('id')->setLimit(1))
      *       ->order('name')
      *       ->setLimit(1)
+     * </pre>
      *
      * @return  DatabaseQuery  Новый объект DatabaseQuery.
      */
@@ -1937,6 +2039,7 @@ abstract class DatabaseQuery implements QueryInterface {
 
     /**
      * Найдите и замените токены типа sprintf в строке формата.
+     * <pre>
      * Каждый токен принимает одну из следующих форм:
      *     %%       - Буквальный символ процента.
      *     %[t]     - Где [t] — спецификатор типа.
@@ -1975,6 +2078,7 @@ abstract class DatabaseQuery implements QueryInterface {
      * Примечания:
      * Спецификатор аргумента не является обязательным, но рекомендуется для ясности.
      * Индекс аргумента, используемый для неуказанных токенов, увеличивается только при его использовании.
+     * </pre>
      *
      * @param string $format  Строка форматирования.
      *
@@ -2011,66 +2115,29 @@ abstract class DatabaseQuery implements QueryInterface {
                 $replacement = $args[$index];
             }
 
-            switch ($match[5]) {
-                case 'a':
-                    return 0 + $replacement;
+            return match ($match[5]) {
+                'a' => 0 + $replacement,
+                'e' => $query->escape($replacement),
+                'E' => $query->escape($replacement, true),
+                'n' => $query->quoteName($replacement),
+                'q' => $query->quote($replacement),
+                'Q' => $query->quote($replacement, false),
+                'r' => $replacement,
+                'y' => $query->year($query->quote($replacement)),
+                'Y' => $query->year($query->quoteName($replacement)),
+                'm' => $query->month($query->quote($replacement)),
+                'M' => $query->month($query->quoteName($replacement)),
+                'd' => $query->day($query->quote($replacement)),
+                'D' => $query->day($query->quoteName($replacement)),
+                'h' => $query->hour($query->quote($replacement)),
+                'H' => $query->hour($query->quoteName($replacement)),
+                'i' => $query->minute($query->quote($replacement)),
+                'I' => $query->minute($query->quoteName($replacement)),
+                's' => $query->second($query->quote($replacement)),
+                'S' => $query->second($query->quoteName($replacement)),
+                default => '',
+            };
 
-                case 'e':
-                    return $query->escape($replacement);
-
-                case 'E':
-                    return $query->escape($replacement, true);
-
-                case 'n':
-                    return $query->quoteName($replacement);
-
-                case 'q':
-                    return $query->quote($replacement);
-
-                case 'Q':
-                    return $query->quote($replacement, false);
-
-                case 'r':
-                    return $replacement;
-
-                case 'y':
-                    return $query->year($query->quote($replacement));
-
-                case 'Y':
-                    return $query->year($query->quoteName($replacement));
-
-                case 'm':
-                    return $query->month($query->quote($replacement));
-
-                case 'M':
-                    return $query->month($query->quoteName($replacement));
-
-                case 'd':
-                    return $query->day($query->quote($replacement));
-
-                case 'D':
-                    return $query->day($query->quoteName($replacement));
-
-                case 'h':
-                    return $query->hour($query->quote($replacement));
-
-                case 'H':
-                    return $query->hour($query->quoteName($replacement));
-
-                case 'i':
-                    return $query->minute($query->quote($replacement));
-
-                case 'I':
-                    return $query->minute($query->quoteName($replacement));
-
-                case 's':
-                    return $query->second($query->quote($replacement));
-
-                case 'S':
-                    return $query->second($query->quoteName($replacement));
-            }
-
-            return '';
         };
 
         /**
@@ -2112,10 +2179,12 @@ abstract class DatabaseQuery implements QueryInterface {
     /**
      * Возвращает номер текущей строки.
      *
+     * <pre>
      * Использование:
      * $query->select('id');
      * $query->selectRowNumber('ordering,publish_up DESC', 'new_ordering');
      * $query->from('#__content');
+     * </pre>
      *
      * @param string $orderBy           Выражение порядка для оконной функции.
      * @param string $orderColumnAlias  Псевдоним для нового столбца сортировки.

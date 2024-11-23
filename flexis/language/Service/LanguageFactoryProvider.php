@@ -24,7 +24,8 @@ class LanguageFactoryProvider implements ServiceProviderInterface {
      * @throws  \RuntimeException
      */
     public function register(Container $container): void {
-        $container->share(
+        $container->alias('language', LanguageFactory::class)
+            ->share(
             'Flexis\\Language\\LanguageFactory',
             function (Container $container) {
                 $factory = new LanguageFactory();

@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Part of the Flexis Framework DI Package
+ * Часть пакета Flexis DIP Framework.
  */
 
 namespace Flexis\DIP;
@@ -596,7 +596,7 @@ class Container implements ContainerInterface {
     }
 
     /**
-     * Получает необработанные данные, присвоенные ключу.
+     * Возвращает необработанные данные, присвоенные ключу.
      *
      * @param   string   $key   Ключ, по которому можно получить сохраненный элемент.
      * @param   boolean  $bail  Генерирует исключение, если ключ не найден.

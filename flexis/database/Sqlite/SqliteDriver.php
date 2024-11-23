@@ -22,9 +22,10 @@ class SqliteDriver extends PdoDriver {
     public ?string $name = 'sqlite';
 
     /**
-     * Символ(ы), используемые для кавычек в именах операторов SQL, таких как имена таблиц, имена полей и т. д.
+     * Символ(ы), используемые для кавычек в именах операторов SQL, таких, как имена таблиц, имена полей и т.д.
      *
-     * Если одна и та же строка символов используется для обеих сторон имени в кавычках, иначе первый символ будет использоваться для открывающей кавычки, а второй — для закрывающей кавычки.
+     * Если одна и та же строка символов используется для обеих сторон имени в кавычках,
+     * иначе первый символ будет использоваться для открывающей кавычки, а второй — для закрывающей кавычки.
      *
      * @var    string|null
      */
@@ -32,7 +33,6 @@ class SqliteDriver extends PdoDriver {
 
     /**
      * Деструктор.
-     *
      */
     public function __destruct() {
         $this->disconnect();
@@ -41,13 +41,13 @@ class SqliteDriver extends PdoDriver {
     /**
      * Изменить набор символов базы данных.
      *
-     * @param string $dbName  Имя базы данных, которое будет изменено.
+     * @param string|null $dbName  Имя базы данных, которое будет изменено.
      *
      * @return  boolean|resource
      *
      * @throws  \RuntimeException
      */
-    public function alterDbCharacterSet(string $dbName) {
+    public function alterDbCharacterSet(?string $dbName = null): bool {
         return false;
     }
 
@@ -97,14 +97,14 @@ class SqliteDriver extends PdoDriver {
     /**
      * Создаёт новую базу данных, используя информацию из объекта $options.
      *
-     * @param \stdClass $options  Объект, используемый для передачи имени пользователя и базы данных драйверу базы данных. Для этого объекта должны быть установлены «db_name» и «db_user».
-     * @param boolean   $utf      Истинно, если база данных поддерживает набор символов UTF-8.
+     * @param \stdClass|null  $options  Объект, используемый для передачи имени пользователя и базы данных драйверу базы данных. Для этого объекта должны быть установлены «db_name» и «db_user».
+     * @param boolean         $utf      Истинно, если база данных поддерживает набор символов UTF-8.
      *
      * @return  boolean|resource
      *
      * @throws  \RuntimeException
      */
-    public function createDatabase(\stdClass $options, bool $utf = true): bool {
+    public function createDatabase(?\stdClass $options = null, bool $utf = true): bool {
         return true;
     }
 
@@ -113,13 +113,13 @@ class SqliteDriver extends PdoDriver {
      *
      * @note: Использование объектов запроса со связанными переменными предпочтительнее, чем приведенное ниже.
      *
-     * @param string  $text   Строка, которую нужно экранировать.
+     * @param mixed   $text   Строка, которую нужно экранировать.
      * @param boolean $extra  Неиспользуемый необязательный параметр для обеспечения дополнительного экранирования.
      *
      * @return  string  Экранированная строка.
      *
      */
-    public function escape(string $text, bool $extra = false): int|string {
+    public function escape(mixed $text, bool $extra = false): string {
         if (\is_int($text)) {
             return $text;
         }
