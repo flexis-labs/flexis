@@ -8,12 +8,24 @@
     ],
     "require": {
         "ext-mbstring": "*",
+        "ext-zlib": "*",
+        "ext-zip": "*",
         "ext-iconv": "*",
         "ext-pdo": "*",
         "ext-simplexml": "*",
+        "ext-curl": "*",
         "symfony/yaml": "^7.1",
         "psr/container": "^2.0",
-        "psr/log": "^3.0"
+        "psr/log": "^3.0",
+        "psr/http-message": "^2.0",
+        "psr/http-client": "^1.0",
+        "laminas/laminas-diactoros": "^3.5",
+        "composer/ca-bundle": "^1.5",
+        "opis/closure": "^3.6",
+        "symfony/console": "^7.1",
+        "symfony/error-handler": "^7.1",
+        "defuse/php-encryption": "^2.4",
+        "paragonie/sodium_compat": "^2.1"
     },
     "require-dev": {
         "ext-sqlsrv": "*",
@@ -21,14 +33,25 @@
     },
     "autoload": {
         "psr-4": {
+            "Flexis\\Application\\": "flexis/application/",
+            "Flexis\\Archive\\": "flexis/archive/",
+            "Flexis\\Authentication\\": "flexis/authentication/",
+            "Flexis\\Console\\": "flexis/console/",
+            "Flexis\\Crypt\\": "flexis/crypt/",
+            "Flexis\\Data\\": "flexis/data/",
             "Flexis\\Database\\": "flexis/database/",
             "Flexis\\DIP\\": "flexis/dip/",
             "Flexis\\Event\\": "flexis/event/",
+            "Flexis\\Filesystem\\": "flexis/filesystem/",
             "Flexis\\Filter\\": "flexis/filter/",
+            "Flexis\\Http\\": "flexis/http/",
             "Flexis\\Input\\": "flexis/input/",
             "Flexis\\Language\\": "flexis/language/",
             "Flexis\\Registry\\": "flexis/registry/",
+            "Flexis\\Router\\": "flexis/router/",
+            "Flexis\\Session\\": "flexis/session/",
             "Flexis\\String\\": "flexis/string/",
+            "Flexis\\Uri\\": "flexis/uri/",
             "Flexis\\Utilities\\": "flexis/utilities/"
         }
     }
