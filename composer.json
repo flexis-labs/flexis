@@ -50,6 +50,7 @@
             "Flexis\\Input\\": "flexis/input/",
             "Flexis\\Language\\": "flexis/language/",
             "Flexis\\Microdata\\": "flexis/microdata/",
+            "Flexis\\Profiler\\": "flexis/profiler/",
             "Flexis\\Proxy\\": "flexis/proxy/",
             "Flexis\\Registry\\": "flexis/registry/",
             "Flexis\\Router\\": "flexis/router/",
