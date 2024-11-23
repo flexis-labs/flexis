@@ -49,6 +49,7 @@
             "Flexis\\Http\\": "flexis/http/",
             "Flexis\\Input\\": "flexis/input/",
             "Flexis\\Language\\": "flexis/language/",
+            "Flexis\\Proxy\\": "flexis/proxy/",
             "Flexis\\Registry\\": "flexis/registry/",
             "Flexis\\Router\\": "flexis/router/",
             "Flexis\\Session\\": "flexis/session/",
