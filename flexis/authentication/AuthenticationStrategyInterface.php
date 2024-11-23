@@ -18,7 +18,7 @@ interface AuthenticationStrategyInterface {
     public function authenticate(): string|bool;
 
     /**
-     * Получить последний результат аутентификации.
+     * Возвращает последний результат аутентификации.
      *
      * @return  integer  Целое число из констант класса аутентификации с результатом аутентификации.
      */
