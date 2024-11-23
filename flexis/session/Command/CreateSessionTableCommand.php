@@ -52,7 +52,7 @@ class CreateSessionTableCommand extends AbstractCommand {
      * @return  void
      */
     protected function configure(): void {
-        $this->setDescription('Создаёт таблицу базы данных сеанса, если она ещё не существует.');
+        $this->setDescription('Создаёт таблицу базы данных сессии, если она ещё не существует.');
     }
 
     /**
