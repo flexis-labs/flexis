@@ -25,7 +25,9 @@
         "symfony/console": "^7.1",
         "symfony/error-handler": "^7.1",
         "defuse/php-encryption": "^2.4",
-        "paragonie/sodium_compat": "^2.1"
+        "paragonie/sodium_compat": "^2.1",
+        "algo26-matthias/idna-convert": "^4.0",
+        "doctrine/inflector": "^2.0"
     },
     "require-dev": {
         "ext-sqlsrv": "*",
