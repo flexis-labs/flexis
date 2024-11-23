@@ -152,7 +152,7 @@ class ExportCommand extends AbstractCommand {
      * @return  void
      */
     protected function configure(): void {
-        $this->setDescription('Экспортировать базу данных');
+        $this->setDescription('Экспорт базы данных');
         $this->addOption('folder', null, InputOption::VALUE_OPTIONAL, 'Путь для записи файлов экспорта', '.');
         $this->addOption('table', null, InputOption::VALUE_REQUIRED, 'Имя таблицы базы данных для экспорта.');
         $this->addOption('zip', null, InputOption::VALUE_NONE, 'Флаг, указывающий, что экспорт будет сохранен в ZIP-архив.');

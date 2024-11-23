@@ -223,7 +223,7 @@ class ImportCommand extends AbstractCommand {
      * @return  void
      */
     protected function configure(): void {
-        $this->setDescription('Импортируйте базу данных');
+        $this->setDescription('Импорт базы данных');
         $this->addOption('folder', null, InputOption::VALUE_OPTIONAL, 'Путь к папке, содержащей файлы для импорта', '.');
         $this->addOption('zip', null, InputOption::VALUE_REQUIRED, 'Имя ZIP-файла для импорта');
         $this->addOption('table', null, InputOption::VALUE_REQUIRED, 'Имя таблицы базы данных для импорта.');
