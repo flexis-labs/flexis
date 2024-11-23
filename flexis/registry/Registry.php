@@ -227,7 +227,7 @@ class Registry implements JsonSerializable, ArrayAccess, IteratorAggregate, Coun
     }
 
     /**
-     * Загрузите ассоциативный массив значений в пространство имен по умолчанию.
+     * Загружает ассоциативный массив значений в пространство имен по умолчанию.
      *
      * @param array       $array      Ассоциативный массив значений для загрузки.
      * @param boolean     $flattened  False (по умолчанию) загрузка из одномерного массива.

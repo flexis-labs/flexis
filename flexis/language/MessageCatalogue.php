@@ -11,7 +11,7 @@ namespace Flexis\Language;
  */
 class MessageCatalogue {
     /**
-     * Резервный вариант для этого каталога.
+     * Вспомогательный вариант для этого каталога.
      *
      * @var    MessageCatalogue|null
      */

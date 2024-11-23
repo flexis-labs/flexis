@@ -80,7 +80,7 @@ class IniParser implements DebugParserInterface {
     }
 
     /**
-     * Загрузите строки из файла.
+     * Загружает строки из файла.
      *
      * @param   string  $filename  Имя файла.
      *

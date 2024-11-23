@@ -18,7 +18,7 @@ interface ParserInterface {
     public function getType(): string;
 
     /**
-     * Загрузите строки из файла.
+     * Загружает строки из файла.
      *
      * @param   string  $filename  Имя файла.
      *
