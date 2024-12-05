@@ -6,6 +6,7 @@
         "framework",
         "dev"
     ],
+    "license": "MIT",
     "require": {
         "ext-mbstring": "*",
         "ext-zlib": "*",
