@@ -30,7 +30,7 @@ final class ListenersPriorityQueue implements IteratorAggregate, Countable {
      *
      * @return  $this
      */
-    public function add(callable $callback, int $priority): self {
+    public function add($callback, int $priority): self {
         $this->listeners[$priority][] = $callback;
 
         return $this;
@@ -43,7 +43,7 @@ final class ListenersPriorityQueue implements IteratorAggregate, Countable {
      *
      * @return  $this
      */
-    public function remove(callable $callback): self {
+    public function remove($callback): self {
         foreach ($this->listeners as $priority => $listeners) {
             if (($key = array_search($callback, $listeners, true)) !== false) {
                 unset($this->listeners[$priority][$key]);
@@ -78,7 +78,7 @@ final class ListenersPriorityQueue implements IteratorAggregate, Countable {
      *
      * @return  mixed  Приоритет прослушивателя, если он существует, или указанное значение по умолчанию.
      */
-    public function getPriority(callable $callback, mixed $default = null): mixed {
+    public function getPriority($callback, mixed $default = null): mixed {
         foreach ($this->listeners as $priority => $listeners) {
             if (in_array($callback, $listeners, true) !== false) {
                 return $priority;
