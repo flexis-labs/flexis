@@ -14,7 +14,7 @@ class Profiler {
     /**
      * @var    integer  Время начала.
      */
-    protected int $start = 0;
+    protected float $start = 0.0;
 
     /**
      * @var    string  Префикс для использования в выводе.
