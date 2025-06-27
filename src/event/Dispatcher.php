@@ -26,7 +26,7 @@ class Dispatcher implements DispatcherInterface {
      *
      * @return  boolean
      */
-    public function addListener(string $eventName, callable $callback, int $priority = 0): bool {
+    public function addListener(string $eventName, $callback, int $priority = 0): bool {
         if (!isset($this->listeners[$eventName])) {
             $this->listeners[$eventName] = new ListenersPriorityQueue();
         }
@@ -44,7 +44,7 @@ class Dispatcher implements DispatcherInterface {
      *
      * @return  mixed  Приоритет прослушивателя или значение NULL, если прослушиватель не существует.
      */
-    public function getListenerPriority(string $eventName, callable $callback): mixed {
+    public function getListenerPriority(string $eventName, $callback): mixed {
         if (isset($this->listeners[$eventName])) {
             return $this->listeners[$eventName]->getPriority($callback);
         }
