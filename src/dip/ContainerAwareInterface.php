@@ -18,5 +18,5 @@ interface ContainerAwareInterface {
      * @return  mixed
      *
      */
-    public function setContainer(Container $container):mixed;
+    public function setContainer(Container $container);
 }
