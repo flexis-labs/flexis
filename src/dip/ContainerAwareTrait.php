@@ -42,7 +42,7 @@ trait ContainerAwareTrait {
      * @return  $this
      *
      */
-    public function setContainer(Container $container):Container {
+    public function setContainer(Container $container) {
         $this->container = $container;
 
         return $this;
