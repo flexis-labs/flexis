@@ -190,7 +190,7 @@ class Dispatcher implements DispatcherInterface {
      *
      * @return  EventInterface
      */
-    public function dispatch(EventInterface|string $event): EventInterface {
+    public function dispatch(EventInterface $event): EventInterface {
         if (isset($this->listeners[$event->getName()])) {
             foreach ($this->listeners[$event->getName()] as $listener) {
                 if ($event->isStopped()) {
