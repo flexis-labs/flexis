@@ -186,11 +186,11 @@ class Dispatcher implements DispatcherInterface {
     /**
      * Отправляет событие всем зарегистрированным прослушивателям.
      *
-     * @param   EventInterface   $event  Событие, которое передается обработчикам/прослушивателям событий.
+     * @param   EventInterface|string   $event  Событие, которое передается обработчикам/прослушивателям событий.
      *
      * @return  EventInterface
      */
-    public function dispatch(EventInterface $event): EventInterface {
+    public function dispatch(EventInterface|string $event): EventInterface {
         if (isset($this->listeners[$event->getName()])) {
             foreach ($this->listeners[$event->getName()] as $listener) {
                 if ($event->isStopped()) {
